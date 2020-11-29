@@ -1,0 +1,45 @@
+﻿@page
+@model PollingSystem.Pages.Polls.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Poll</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post">
+            <div class="text-danger"></div>
+
+            <div id="fields"></div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <button id="btnAddField">Add Field</button>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var $fields = $('#fields');
+        $('#btnAddField').click(function (e) {
+            e.preventDefault();
+            $('<div class="form-group"><label asp-for="Poll.Title" class="control-label" ></label ><input type="text" name="dynamicField" /><span asp-validation-for="Poll.Title" class="text-danger"></span></div >').appendTo($fields);
+        });
+    });
+
+</script>
+}
